@@ -1,44 +1,40 @@
 package com.library.mapper;
-
-import com.library.pojo.SystemUser;
-import com.library.vo.MenuInfo;
-
+import com.library.pojo.User;
 import java.util.List;
-
 
 public interface BackLoginMapper {
     /**
      * 登录
-     * @param systemUser
+     * @param user
      * @return
      */
-    SystemUser selectAccountPassword(SystemUser systemUser);
-
-    /**
-     * 根据角色id获取对应所有的菜单id
-     * @param roleId 角色id
-     */
-    List<MenuInfo> selectRoleMenuList(Integer roleId);
+    User selectAccountPassword(User user);
 
     /**
      * 添加后台用户信息
-     * @param systemUser
+     * @param user
      * @return
      */
-    boolean saveSystemUser(SystemUser systemUser);
+    boolean insertUser(User user);
 
     /**
      * 修改后台用户信息
-     * @param systemUser
+     * @param user
      * @return
      */
-    boolean updateSystemUser(SystemUser systemUser);
+    boolean updateUser(User user);
 
     /**
      * 查询所有用户信息
      * @return
      */
-    List<SystemUser> selectSystemUserList();
+    List<User> selectUserList();
+
+    /**
+     * 查询用户信息,根据id
+     * @return
+     */
+    User selectUser(Integer id);
 
     /**
      * 删除用户

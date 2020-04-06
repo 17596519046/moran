@@ -1,43 +1,41 @@
 package com.library.service;
 
-import com.library.pojo.SystemUser;
-import com.library.vo.MenuInfo;
-
+import com.library.pojo.User;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface BackService {
     /**
      * 后台登录接口
-     * @param systemUser 用户名
+     * @param user 用户名
      * @return
      */
-    boolean backLogin(SystemUser systemUser, HttpServletRequest request);
-
-    /**
-     * 获取菜单权限
-     * @return
-     */
-    List<MenuInfo> selectMenuInfo(HttpServletRequest request);
+    boolean backLogin(User user, HttpServletRequest request);
 
     /**
      * 添加后台用户信息
-     * @param systemUser
+     * @param user
      * @return
      */
-    boolean saveSystemUser(SystemUser systemUser);
+    boolean saveUser(User user);
     /**
      * 修改后台用户信息
-     * @param systemUser
+     * @param user
      * @return
      */
-    boolean updateSystemUser(SystemUser systemUser);
+    boolean updateUser(User user);
 
     /**
      * 查询所有用户信息
      * @return
      */
-    List<SystemUser> selectSystemUserList();
+    List<User> selectUserList();
+
+    /**
+     * 查询用户信息，根据id
+     * @return
+     */
+    User selectUser(Integer userId);
 
     /**
      * 删除用户
