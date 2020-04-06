@@ -1,0 +1,5 @@
+com\rich\mapper\LoginMapper.class
+com\rich\service\impl\LoginServiceImpl.class
+com\rich\controller\LoginController.class
+com\rich\pojo\User.class
+com\rich\service\LoginService.class

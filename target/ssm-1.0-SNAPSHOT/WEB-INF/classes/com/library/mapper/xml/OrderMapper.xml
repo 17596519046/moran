@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.mapper.OrderMapper">
+
+    <select id="getAllOrder" resultType="com.library.vo.OrderInfoVO">
+        SELECT
+        odi.id,
+        odi.num,
+        odi.price,
+        gs.name,
+        odi.orderStatus,
+        odi.orderCode,
+        gs.detail,
+        gs.img,
+        odi.cretateTime,
+        CONCAT(ai.province,' ',ai.city,' ',ai.area,' ',ai.detailsAddress) as address,
+        ai.receivePhone,
+        su.user_name
+        FROM
+        order_info odi
+        LEFT JOIN goods gs ON odi.goods_id = gs.id
+        LEFT JOIN address_info ai ON odi.address_info_id = ai.id
+        Left JOIN system_user su ON ai.userId = su.id
+        where 1=1
+        AND odi.orderStatus = #{isAll}
+    </select>
+    <select id="getAllOrder1" resultType="com.library.vo.OrderInfoVO">
+        SELECT
+        odi.id,
+        odi.num,
+        odi.price,
+        gs.name,
+        odi.orderStatus,
+        odi.orderCode,
+        gs.detail,
+        gs.img,
+        odi.cretateTime,
+        CONCAT(ai.province,' ',ai.city,' ',ai.area,' ',ai.detailsAddress) as address,
+        ai.receivePhone,
+        su.user_name
+        FROM
+        order_info odi
+        LEFT JOIN goods gs ON odi.goods_id = gs.id
+        LEFT JOIN address_info ai ON odi.address_info_id = ai.id
+        Left JOIN system_user su ON ai.userId = su.id
+        where 1=1
+        AND odi.orderStatus != 6
+    </select>
+
+    <select id="getOneOrder" resultType="com.library.vo.OrderInfoVO">
+        SELECT
+            odi.id,
+            odi.num,
+            odi.price,
+            gs.name,
+            odi.orderStatus,
+            odi.orderCode,
+            gs.detail,
+            gs.img,
+            odi.cretateTime,
+            CONCAT(ai.province,' ',ai.city,' ',ai.area,' ',ai.detailsAddress) as address,
+            ai.receivePhone,
+            su.user_name,
+            gs.id as gsId
+        FROM
+            order_info odi
+                LEFT JOIN goods gs ON odi.goods_id = gs.id
+                LEFT JOIN address_info ai ON odi.address_info_id = ai.id
+                Left JOIN system_user su ON ai.userId = su.id
+        where odi.id = #{orderId}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE order_info
+        SET orderStatus = #{orderStatus}
+        WHERE id = #{orderId}
+    </update>
+
+    <update id="updateGoodsNum">
+        UPDATE goods SET num = num - #{num} WHERE id = #{gsId}
+    </update>
+
+    <select id="getAllGoods" resultType="com.library.pojo.Goods">
+        select  * from goods order by id desc
+    </select>
+    <select id="getAllGoods1" resultType="com.library.pojo.Goods">
+        select  * from goods
+        where 1 = 1
+        AND name like CONCAT('%', #{name}, '%')
+        order by id desc
+    </select>
+
+    <insert id="addGoods">
+        INSERT INTO goods ( name, price, detail, num, img, area )
+        VALUES
+        (#{name}, #{price}, #{detail}, #{num}, #{img}, #{area});
+    </insert>
+    <insert id="deleteGoods">
+        delete from goods where id = #{goodsId}
+    </insert>
+    <insert id="updateGoods">
+        update goods set name = #{name},price = #{price},detail = #{detail},num = #{num},img = #{img},area = #{area} where id = #{id}
+    </insert>
+
+</mapper>

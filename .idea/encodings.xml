@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/library/pojo/BuyCar.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/library/pojo/Goods.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/library/pojo/SystemUser.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/library/vo/OrderInfoVO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/static/img/image/1.ico" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/static/img/image/fav.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/static/img/image/yu.jpg" charset="GBK" />
+  </component>
+</project>
