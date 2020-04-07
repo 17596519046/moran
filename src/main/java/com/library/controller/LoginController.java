@@ -1,8 +1,5 @@
 package com.library.controller;
-import com.library.pojo.*;
-import com.library.service.LoginService;
-import com.library.util.FastDFSClient;
-import com.library.vo.BuyCarInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import com.library.pojo.*;
+import com.library.service.LoginService;
+import com.library.util.FastDFSClient;
 
 /***
  * 登陆/注册
@@ -31,7 +31,7 @@ public class LoginController {
      * @return
      */
     @RequestMapping("main")
-    public String selectAll(Goods goods,Model model,HttpServletRequest request) {
+    public String selectAll(Goods goods, Model model, HttpServletRequest request) {
         model.addAttribute("name",null);
         return "static/pages/back/login";
     }

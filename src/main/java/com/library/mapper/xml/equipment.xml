@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.mapper.EquipmentMapper">
+
+    <insert id="insertEquipment">
+        INSERT INTO equipment (name, buyTime, number, destoryTime, isAppointment,createTime,updateTime)
+        VALUES
+        (#{name} ,#{buyTime} ,#{number} ,#{destoryTime} ,#{isAppointment} ,#{createTime} ,#{updateTime}  )
+    </insert>
+
+    <update id="updateEquipment">
+        update equipment set name = #{name} ,buyTime = #{buyTime} ,number = #{number} ,
+        destoryTime = #{destoryTime} ,isAppointment = #{isAppointment},updateTime = #{updateTime}
+         where id = #{id}
+    </update>
+
+    <select id="selectList" resultType="com.library.pojo.Equipment">
+        select * from equipment
+    </select>
+
+    <select id="selectEquipment" resultType="com.library.pojo.Equipment">
+        SELECT * from equipment where id = #{id}
+    </select>
+
+    <delete id="deleteEquipment">
+        delete from equipment where id = #{id}
+    </delete>
+</mapper>

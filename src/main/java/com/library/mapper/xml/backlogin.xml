@@ -2,32 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.library.mapper.BackLoginMapper">
 
-    <select id="selectAccountPassword" resultType="com.library.pojo.SystemUser">
-        select * from system_user where user_name=#{userName} and password=#{password} and status = 1
+    <select id="selectAccountPassword" resultType="com.library.pojo.User">
+        select * from user where number=#{number}  and phone=#{phone}
     </select>
 
-    <select id="selectRoleMenuList" resultType="com.library.vo.MenuInfo">
-        SELECT
-            b.*
-        FROM
-            role_menu AS a
-        right JOIN menu AS b ON a.menu_id = b.id
-        where role_id = #{roleId}
-    </select>
-
-    <insert id="saveSystemUser">
-        insert into system_user (user_name,password,email,phone,role_id,create_time,update_time,status)
-        values (#{userName},#{password},#{email},#{phone},#{roleId},#{createTime},#{updateTime},#{status})
+    <insert id="insertUser">
+        INSERT INTO user (name, number, grade, phone, entranceTime, graduateTime,role,createTime,updateTime)
+        VALUES
+        (#{name} ,#{number} ,#{grade} ,#{phone} ,#{entranceTime} ,#{graduateTime},#{role} ,#{createTime} ,#{updateTime}  )
     </insert>
 
-    <update id="updateSystemUser">
-        update system_user set user_name=#{userName},password=#{password},email=#{email},phone=#{phone},role_id=#{roleId} where id = #{id}
+    <update id="updateUser">
+        update user set name=#{name} ,number=#{number},grade = #{grade}  ,phone=#{phone},entranceTime=#{entranceTime}
+         ,graduateTime = #{graduateTime},role = #{role},updateTime = #{updateTime}
+         where id = #{id}
     </update>
 
-    <select id="selectSystemUserList" resultType="com.library.pojo.SystemUser">
-        select * from system_user
+    <select id="selectUserList" resultType="com.library.pojo.User">
+        select * from user
     </select>
+
+    <select id="selectUser" resultType="com.library.pojo.User">
+        SELECT * from user where id = #{id}
+    </select>
+
     <delete id="deleteUser">
-        delete from system_user where id = #{userId}
+        delete from user where id = #{userId}
     </delete>
 </mapper>

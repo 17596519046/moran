@@ -1,14 +1,10 @@
 package com.library.service.impl;
-
 import com.library.mapper.BackLoginMapper;
-import com.library.pojo.SystemUser;
+import com.library.pojo.User;
 import com.library.service.BackService;
-import com.library.vo.MenuInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,74 +16,43 @@ public class BackServiceImpl implements BackService {
 
     /**
      *
-     * @param systemUser 用户名
+     * @param user 用户名
      * @param request
      * @return
      */
     @Override
-    public boolean backLogin(SystemUser systemUser, HttpServletRequest request) {
+    public boolean backLogin(User user, HttpServletRequest request) {
         // 查询数据库获取用户
-        SystemUser sys = backLoginMapper.selectAccountPassword(systemUser);
+        User sys = backLoginMapper.selectAccountPassword(user);
         if (sys == null){
             return false;
         }
-        if (sys.getRoleId() == 3) {
-            return false;
-        }
+//        if (sys.getRole() == 3) {
+//            return false;
+//        }
         request.getSession().setAttribute("systemUser",sys);
         return true;
     }
 
-    /**
-     * 获取菜单权限
-     * @param request
-     * @return
-     */
-    @Override
-    public List<MenuInfo> selectMenuInfo(HttpServletRequest request) {
-        SystemUser systemUser = (SystemUser) request.getSession().getAttribute("systemUser");
-        //获取权限
-        List<MenuInfo> menuList = backLoginMapper.selectRoleMenuList(systemUser.getRoleId());
-        List<MenuInfo> sonMenu = new ArrayList<>();
-        List<MenuInfo> parentMenu = new ArrayList<>();
-        for (MenuInfo key : menuList) {
-            if (key.getParentId() == 0){
-                parentMenu.add(key);
-            }else {
-                sonMenu.add(key);
-            }
-        }
-        for (MenuInfo key : parentMenu) {
-            List<MenuInfo> newMenu = new ArrayList<>();
-            for (MenuInfo menu : sonMenu) {
-                //如果父菜单的id等于子菜单的父id 说明是同一个目录下的
-                if (key.getId() == menu.getParentId()){
-                    newMenu.add(menu);
-                }
-            }
-            key.setMenuInfoList(newMenu);
-        }
-        return parentMenu;
-    }
 
     /**
      * 添加后台用户信息
-     * @param systemUser
+     * @param user
      * @return
      */
     @Override
-    public boolean saveSystemUser(SystemUser systemUser) {
-        return backLoginMapper.saveSystemUser(systemUser.setCreateTime(new Date()).setUpdateTime(new Date()).setStatus(1));
+    public boolean saveUser(User user) {
+        return backLoginMapper.insertUser(user.setCreateTime(new Date()).setUpdateTime(new Date()));
     }
 
     /**
      * 修改后台用户信息
-     * @param systemUser
+     * @param user
      * @return
      */
     @Override
-    public boolean updateSystemUser(SystemUser systemUser) {
-        return backLoginMapper.updateSystemUser(systemUser.setUpdateTime(new Date()));
+    public boolean updateUser(User user) {
+        return backLoginMapper.updateUser(user.setUpdateTime(new Date()));
     }
 
     /**
@@ -95,10 +60,24 @@ public class BackServiceImpl implements BackService {
      * @return
      */
     @Override
-    public List<SystemUser> selectSystemUserList() {
-        return backLoginMapper.selectSystemUserList();
+    public List<User> selectUserList() {
+        return backLoginMapper.selectUserList();
     }
 
+    /***
+     * 查询某一用户信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public User selectUser(Integer userId) {
+        return backLoginMapper.selectUser(userId);
+    }
+
+    /***
+     * 删除用户
+     * @param userId
+     */
     @Override
     public void deleteUser(Integer userId) {
         backLoginMapper.deleteUser(userId);
