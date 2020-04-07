@@ -6,42 +6,42 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 /**
-    * equipment å®ä½“ç±»\r
+    * equipment ç€¹ç‚°ç¶‹ç»«ç± r
     * 2020-04-06 14:47:03
    */ 
 @Data
 @Accessors(chain = true)
 public class Equipment{
 	/**
-	*Ö÷¼üid
+	*ä¸»é”®id
 	*/
 	private int	id;
 	/**
-	*Éè±¸Ãû³Æ
+	*è®¾å¤‡åç§°
 	*/
 	private String	name;
 	/**
-	*¹ºÈëÊ±¼ä
+	*è´­å…¥æ—¶é—´
 	*/
 	private Date buyTime;
 	/**
-	*±àºÅ
+	*ç¼–å·
 	*/
 	private String	number;
 	/**
-	*Ïú»ÙÊ±¼ä
+	*é”€æ¯æ—¶é—´
 	*/
 	private Date destoryTime;
 	/**
-	*´´½¨Ê±¼ä
+	*åˆ›å»ºæ—¶é—´
 	*/
 	private Date createTime;
 	/**
-	*ĞŞ¸ÄÊ±¼ä
+	*ä¿®æ”¹æ—¶é—´
 	*/
 	private Date updateTime;
 	/**
-	*0:Î´Ô¤Ô¼£¬1£ºÒÑÔ¤Ô¼
+	*0:æœªé¢„çº¦ï¼Œ1ï¼šå·²é¢„çº¦
 	*/
 	private int	isAppointment;
 }

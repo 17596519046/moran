@@ -6,34 +6,34 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 /**
-    * laboratory ÊµÌåÀà
+    * laboratory å®ä½“ç±»
     * 2020-04-06 14:46:11
    */ 
 @Data
 @Accessors(chain = true)
 public class Laboratory{
 	/**
-	*Ö÷¼üid
+	*ä¸»é”®id
 	*/
 	private int	id;
 	/**
-	*ÊµÑéÊÒÃû³Æ
+	*å®éªŒå®¤åç§°
 	*/
 	private String	name;
 	/**
-	*Â¥ºÅ
+	*æ¥¼å·
 	*/
 	private String	buildingNo;
 	/**
-	*´´½¨Ê±¼ä
+	*åˆ›å»ºæ—¶é—´
 	*/
 	private Date createTime;
 	/**
-	*¸ü¸ÄÊ±¼ä
+	*æ›´æ”¹æ—¶é—´
 	*/
 	private Date updateTime;
 	/**
-	*ÊÇ·ñÔ¤Ô¼£¨0£ºÎ´Ô¤Ô¼£¬1£ºÒÑÔ¤Ô¼£©
+	*æ˜¯å¦é¢„çº¦ï¼ˆ0ï¼šæœªé¢„çº¦ï¼Œ1ï¼šå·²é¢„çº¦ï¼‰
 	*/
 	private int	isAppointment;
 }

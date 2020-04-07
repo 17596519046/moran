@@ -6,46 +6,46 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 /**
-    * user_equipment å®ä½“ç±»\r
+    * user_equipment ç€¹ç‚°ç¶‹ç»«ç± r
     * 2020-04-06 14:48:26
    */ 
 @Data
 @Accessors(chain = true)
 public class UserEquipment{
 	/**
-	*Ö÷¼üid
+	*ä¸»é”®id
 	*/
 	private int	id;
 	/**
-	*Ô¤Ô¼±àºÅ
+	*é¢„çº¦ç¼–å·
 	*/
 	private String	code;
 	/**
-	*Éè±¸id
+	*è®¾å¤‡id
 	*/
 	private int	equipmentId;
 	/**
-	*Ô¤Ô¼Ê±¼ä
+	*é¢„çº¦æ—¶é—´
 	*/
 	private Date appointTime;
 	/**
-	*¹é»¹Ê±¼ä
+	*å½’è¿˜æ—¶é—´
 	*/
 	private Date	returnTime;
 	/**
-	*Ô¤Ô¼ÈË
+	*é¢„çº¦äºº
 	*/
 	private int	userId;
 	/**
-	*ÉóºËÈË
+	*å®¡æ ¸äºº
 	*/
 	private int	auditId;
 	/**
-	*ÓâÆÚÊ±¼ä
+	*é€¾æœŸæ—¶é—´
 	*/
 	private Date	overdueTime;
 	/**
-	*0:Éú³ÉÔ¤Ô¼µ¥,1:ÉóºËÍ¨¹ı£¬2£ºÉóºËÊ§°Ü£¬3£ºÒÑ¹é»¹£¬4£ºÒÑÓâÆÚ
+	*0:ç”Ÿæˆé¢„çº¦å•,1:å®¡æ ¸é€šè¿‡ï¼Œ2ï¼šå®¡æ ¸å¤±è´¥ï¼Œ3ï¼šå·²å½’è¿˜ï¼Œ4ï¼šå·²é€¾æœŸ
 	*/
 	private int	state;
 }

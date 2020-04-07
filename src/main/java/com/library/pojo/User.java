@@ -7,52 +7,52 @@ import lombok.experimental.Accessors;
 import java.util.Date;
 
 /**
-    * user ÊµÌåÀà
+    * user å®ä½“ç±»
     * 2020-04-06 14:44:56
    */ 
 @Data
 @Accessors(chain = true)
 public class User{
 	/**
-	*Ö÷¼üid
+	*ä¸»é”®id
 	*/
 	private int	id;
 	/**
-	*1£º³¬¹Ü£¬2£ºÀÏÊ¦£¬3£ºÑ§Éú£¬4£ººóÇÚ
+	*1ï¼šè¶…ç®¡ï¼Œ2ï¼šè€å¸ˆï¼Œ3ï¼šå­¦ç”Ÿï¼Œ4ï¼šåå‹¤
 	*/
 	private int	role;
 	/**
-	*ĞÕÃû
+	*å§“å
 	*/
 	private String	name;
 	/**
-	*¹¤ºÅ
+	*å·¥å·
 	*/
 	private String	number;
 	/**
-	*°à¼¶
+	*ç­çº§
 	*/
 	private String	grade;
 	/**
-	*ÊÖ»úºÅ
+	*æ‰‹æœºå·
 	*/
 	private String	phone;
 	/**
-	*ÈëÑ§Ê±¼ä
+	*å…¥å­¦æ—¶é—´
 	*/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date entranceTime;
 	/**
-	*±ÏÒµÊ±¼ä
+	*æ¯•ä¸šæ—¶é—´
 	*/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date graduateTime;
 	/**
-	*´´½¨Ê±¼ä
+	*åˆ›å»ºæ—¶é—´
 	*/
 	protected Date createTime;
 	/**
-	*¸üĞÂÊ±¼ä
+	*æ›´æ–°æ—¶é—´
 	*/
 	protected Date updateTime;
 }
