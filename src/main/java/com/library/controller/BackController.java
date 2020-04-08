@@ -4,6 +4,7 @@ import com.library.service.BackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class BackController {
     @RequestMapping("/index")
     public String backIndex() {
         // 跳到后台主页
-        return "pages/back/index";
+        return "static/pages/back/index";
     }
 
     /***
@@ -36,7 +37,7 @@ public class BackController {
     @RequestMapping("/login")
     public String backLogin() {
         // 跳到登陆页面
-        return "pages/back/login";
+        return "static/pages/back/login";
     }
 
     /**
@@ -67,7 +68,7 @@ public class BackController {
         } else {
             backService.saveUser(user);
         }
-        return "redirect:user";
+        return "redirect:index";
     }
 
     /**
