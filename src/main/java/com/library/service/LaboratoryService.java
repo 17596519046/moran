@@ -1,8 +1,11 @@
 package com.library.service;
 
 import com.library.pojo.Laboratory;
+import com.library.pojo.User;
+import com.library.pojo.UserLaboratory;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LaboratoryService {
     /**
@@ -33,7 +36,15 @@ public interface LaboratoryService {
 
     /**
      * 删除实验室
-     * @param userId
+     * @param id
      */
     void deleteLaboratory(Integer id);
+
+    List<Map> selectLaboratoryUserInfo(UserLaboratory userLaboratory);
+
+    UserLaboratory selectLaboratoryUser(UserLaboratory userLaboratory);
+
+    boolean insertLaboratoryUser(UserLaboratory userLaboratory);
+
+    boolean updateLaboratoryUser(UserLaboratory userLaboratory, User user);
 }

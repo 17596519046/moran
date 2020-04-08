@@ -14,6 +14,28 @@
          where id = #{id}
     </update>
 
+    <insert id="insertEquipmentUser">
+        INSERT INTO user_equipment (code, equipmentId, appointTime, returnTime, userId, auditId, overdueTime, state)
+        VALUES
+        (#{code} ,#{equipmentId} ,#{appointTime} ,#{returnTime} ,#{userId} ,#{auditId} ,#{overdueTime} ,#{state} )
+    </insert>
+
+    <update id="updateEquipmentUser">
+        UPDATE user_equipment set auditId = #{auditId} , overdueTime = #{overdueTime} , state = #{state} where id = #{id}
+    </update>
+
+    <select id="selectEquipmentUser" resultType="com.library.pojo.UserEquipment">
+        SELECT * from user_equipment where id = {id}
+    </select>
+
+    <select id="selectEquipmentUserInfo"resultType="map">
+        select ue.*,e.*,au.name auditName from user_equipment ue
+        LEFT join user u on u.id = ue.userId
+        LEFT join user au on au.id = ue.auditId
+        LEFT join equipment e on e.id = ue.equipmentId
+        where u.id = #{userId}
+    </select>
+
     <select id="selectList" resultType="com.library.pojo.Equipment">
         select * from equipment
     </select>

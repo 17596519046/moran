@@ -13,6 +13,29 @@
          where id = #{id}
     </update>
 
+    <insert id="insertLaboratoryUser">
+        INSERT INTO user_laboratory
+         (code, userId, laboratoryId, appointTime, returnTime, overdueTime, auditId, state, createTime)
+        VALUES
+        (#{code} ,#{userId} ,#{laboratoryId} ,#{appointTime} ,#{returnTime} ,#{overdueTime} ,#{auditId} ,#{state} ,#{createTime} )
+    </insert>
+
+    <update id="updateLaboratoryUser">
+        UPDATE user_laboratory set returnTime = #{returnTime} ,overdueTime = #{overdueTime} ,auditId = #{auditId} ,state = #{state} where id = #{id}
+    </update>
+
+    <select id="selectLaboratoryUser" resultType="com.library.pojo.UserLaboratory">
+        select * from user_laboratory where id = #{id}
+    </select>
+
+    <select id="selectLaboratoryUserInfo" resultType="map">
+        select ul.*,l.*,au.name auditName from user_laboratory ul
+        LEFT join user u on u.id = ul.userId
+        LEFT join user au on au.id = ul.auditId
+        LEFT join laboratory l on l.id = ul.laboratoryId
+        where u.id = #{userId}
+    </select>
+
     <select id="selectList" resultType="com.library.pojo.Laboratory">
         select * from laboratory
     </select>

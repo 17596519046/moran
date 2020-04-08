@@ -1,6 +1,9 @@
 package com.library.mapper;
 import com.library.pojo.Equipment;
+import com.library.pojo.UserEquipment;
+
 import java.util.List;
+import java.util.Map;
 
 public interface EquipmentMapper {
 
@@ -35,4 +38,32 @@ public interface EquipmentMapper {
      * @param id
      */
     void deleteEquipment(Integer id);
+
+    /***
+     * 修改用户预约设备详情
+     * @param userEquipment
+     * @return
+     */
+    boolean updateEquipmentUser(UserEquipment userEquipment);
+
+    /***
+     * 查询预约设备详情
+     * @param userEquipment
+     * @return
+     */
+    UserEquipment selectEquipmentUser(UserEquipment userEquipment);
+
+    /***
+     * 根据用户权限，查询设备预约详情
+     * @param userEquipment
+     * @return
+     */
+    List<Map> selectEquipmentUserInfo(UserEquipment userEquipment);
+
+    /***
+     * 预约设备
+     * @param userEquipment
+     * @return
+     */
+    boolean insertEquipmentUser(UserEquipment userEquipment);
 }
