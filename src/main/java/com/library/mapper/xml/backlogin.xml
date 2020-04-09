@@ -9,7 +9,7 @@
     <insert id="insertUser">
         INSERT INTO user (name, number, grade, phone, entranceTime, graduateTime,role,createTime,updateTime)
         VALUES
-        (#{name} ,#{number} ,#{grade} ,#{phone} ,#{entranceTime} ,#{graduateTime},#{role} ,#{createTime} ,#{updateTime}  )
+        (#{name} ,#{number} ,#{grade} ,#{phone} ,#{entranceTime} ,#{graduateTime},#{role} ,now() ,#{updateTime}  )
     </insert>
 
     <update id="updateUser">
