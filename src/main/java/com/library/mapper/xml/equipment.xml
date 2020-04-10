@@ -28,7 +28,7 @@
         SELECT * from user_equipment where id = {id}
     </select>
 
-    <select id="selectEquipmentUserInfo"resultType="map">
+    <select id="selectEquipmentUserInfo" resultType="map">
         select ue.*,e.*,au.name auditName from user_equipment ue
         LEFT join user u on u.id = ue.userId
         LEFT join user au on au.id = ue.auditId

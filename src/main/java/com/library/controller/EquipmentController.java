@@ -39,8 +39,8 @@ public class EquipmentController {
      *
      * @return
      */
-    @RequestMapping("/updateEquipment")
-    public String updateEquipment(UserEquipment userEquipment, HttpServletRequest request) {
+    @RequestMapping("/updateEquipmentUser")
+    public String updateEquipmentUser(UserEquipment userEquipment, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("systemUser");
         if (userEquipment.getId() != 0) {
             equipmentService.updateEquipmentUser(userEquipment,user);
