@@ -61,14 +61,14 @@ public class BackController {
      * @return
      */
     @RequestMapping("/updateUser")
-    public String updateUser(User user) {
+    public String updateUser(User user, HttpServletRequest request) {
         // 如果用户id不为0 说明是修改 为0 或者为 null 是新增
-        if (user.getId() != 0) {
+        if (user.getId() != null && user.getId() != 0) {
             backService.updateUser(user);
         } else {
-            backService.saveUser(user);
+            backService.saveUser(user, request);
         }
-        return "redirect:index";
+        return "redirect:user";
     }
 
     /**
@@ -76,8 +76,8 @@ public class BackController {
      *
      * @return
      */
-    @RequestMapping("/deleteUser")
-    public String deleteUser(Integer userId) {
+    @RequestMapping("/removeUser")
+    public String removeUser(Integer userId) {
         backService.deleteUser(userId);
         return "redirect:user";
     }
@@ -87,11 +87,11 @@ public class BackController {
      *
      * @return
      */
-    @RequestMapping("/getOneUser")
-    public String getOneUser(Model model, Integer userId) {
+    @RequestMapping("/getUserId")
+    public String getUserId(Model model, Integer userId) {
         User user = backService.selectUser(userId);
         model.addAttribute("user", user);
-        return "pages/back/user-update";
+        return "static/pages/back/userinsert";
     }
 
     /**
@@ -103,7 +103,7 @@ public class BackController {
     public String selectSystemUserList(Model model) {
         List<User> userList = backService.selectUserList();
         model.addAttribute("all", userList);
-        return "pages/back/user";
+        return "static/pages/back/user";
     }
 
 }

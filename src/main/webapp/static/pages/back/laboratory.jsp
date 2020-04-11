@@ -24,33 +24,30 @@
 
 <div>
 
-    <a class="btn btn-default" href="../../static/pages/back/userinsert.jsp" role="button">添加管理员</a>
+    <a class="btn btn-default" href="../../static/pages/back/laboratoryinsert.jsp" role="button">添加设备</a>
 
     <table>
         <tr>
-            <td>姓名</td>
-            <td>工号/学号</td>
-            <td>手机号</td>
-            <td>班级</td>
-            <td>入学时间</td>
-            <td>毕业时间</td>
+            <td>名称</td>
+            <td>楼号</td>
             <td>创建时间</td>
-            <td>操作</td>
+            <td>使用人姓名</td>
+            <td>使用人工号</td>
+            <td>是否预约</td>
         </tr>
 
         <c:forEach items="${all }" var="all">
 
             <tr>
                 <td>${all.name}</td>
-                <td>${all.number}</td>
-                <td>${all.phone}</td>
-                <td>${all.grade}</td>
-                <td>${all.entranceTime1}</td>
-                <td>${all.graduateTime1}</td>
+                <td>${all.buildingNo}</td>
                 <td>${all.createTime1}</td>
+                <td>${all.userName}</td>
+                <td>${all.userNumber}</td>
+                <td><c:if test="${all.isAppointment == 1}">已预约</c:if><c:if test="${all.isAppointment == 0}">未预约</c:if></td>
                 <td>
-                    <a href="/back/getUserId?userId=${all.id }">修改</a>
-                    <a href="/back/removeUser?userId=${all.id }">删除</a>
+                    <a href="/laboratory/getLaboratory?id=${all.id }">修改</a>
+                    <a href="/laboratory/deleteLaboratory?id=${all.id }">删除</a>
                 </td>
             </tr>
 

@@ -1,4 +1,5 @@
 package com.library.controller;
+
 import com.library.pojo.Laboratory;
 import com.library.pojo.User;
 import com.library.pojo.UserLaboratory;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.plaf.nimbus.State;
 import java.util.List;
 import java.util.Map;
 
@@ -20,35 +22,19 @@ public class LaboratoryController {
     LaboratoryService laboratoryService;
 
     /**
-     * 修改实验室信息
-     *laboratory
+     * 修改添加实验室信息
+     * laboratory
+     *
      * @return
      */
     @RequestMapping("/updateLaboratory")
     public String updateLaboratory(Laboratory laboratory) {
-        if (laboratory.getId() != 0) {
+        if (laboratory.getId() != null && laboratory.getId() != 0) {
             laboratoryService.updateLaboratory(laboratory);
         } else {
             laboratoryService.saveLaboratory(laboratory);
         }
         return "redirect:laboratory";
-    }
-
-    /**
-     * 预约实验室/修改预约实验室的信息
-     *laboratory
-     * @return
-     */
-    @RequestMapping("/updateLaboratoryUser")
-    public String updateLaboratoryUser(UserLaboratory userLaboratory, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("systemUser");
-        if (userLaboratory.getId() != 0) {
-            laboratoryService.updateLaboratoryUser(userLaboratory,user);
-        } else {
-            userLaboratory.setAuditId(user.getId());
-            laboratoryService.insertLaboratoryUser(userLaboratory);
-        }
-        return "redirect:selectLaboratoryUserInfo";
     }
 
     /**
@@ -62,17 +48,6 @@ public class LaboratoryController {
         return "redirect:laboratory";
     }
 
-    /**
-     * 通过id获取一个用户
-     *
-     * @return
-     */
-    @RequestMapping("/getLaboratory")
-    public String getLaboratory(Model model, Integer id) {
-        Laboratory laboratory = laboratoryService.selectLaboratory(id);
-        model.addAttribute("laboratory", laboratory);
-        return "pages/back/laboratory-update";
-    }
 
     /**
      * 查询所有实验室
@@ -83,31 +58,65 @@ public class LaboratoryController {
     public String selectEquipmentList(Model model) {
         List<Laboratory> laboratoryList = laboratoryService.selectLaboratoryList();
         model.addAttribute("all", laboratoryList);
-        return "pages/back/laboratory";
+        return "static/pages/back/laboratory";
     }
 
     /**
-     * 根据用户权限查询预约实验室基本信息
+     * 通过id获取一个用户
      *
      * @return
+     */
+    @RequestMapping("/getLaboratory")
+    public String getLaboratory(Model model, Integer id) {
+        Laboratory laboratory = laboratoryService.selectLaboratory(id);
+        model.addAttribute("laboratory", laboratory);
+        return "static/pages/back/laboratoryinsert";
+    }
+
+    /**
+     * 查询预约实验室的信息
      */
     @RequestMapping("/selectLaboratoryUserInfo")
-    public String selectLaboratoryUserInfo(Model model, UserLaboratory userLaboratory) {
-        List<Map> laboratoryList = laboratoryService.selectLaboratoryUserInfo(userLaboratory);
+    public String selectLaboratoryUserInfo(Model model) {
+        List<Laboratory> laboratoryList = laboratoryService.selectLaboratoryUserInfo();
         model.addAttribute("laboratoryList", laboratoryList);
-        return "pages/back/laboratory";
+        return "static/pages/back/laboratoryexamine";
     }
 
     /**
-     * 根据预约实验室详情
+     * 通过或者拒绝设备
+     */
+    @RequestMapping("/appointmentLaboratory")
+    public String appointmentLaboratory(int state, Integer id, HttpServletRequest request) {
+        laboratoryService.appointmentLaboratory(state, id, request);
+        return "redirect: selectLaboratoryUserInfo";
+    }
+
+    /**
+     * 预约详情
      *
      * @return
      */
-    @RequestMapping("/selectLaboratoryUser")
-    public String selectLaboratoryUser(Model model, UserLaboratory userLaboratory) {
-        UserLaboratory laboratoryUser = laboratoryService.selectLaboratoryUser(userLaboratory);
-        model.addAttribute("laboratoryUser", laboratoryUser);
-        return "pages/back/laboratory";
+    @RequestMapping("/getlaboratoryappiont")
+    public String getlaboratoryappiont(Model model, Integer state) {
+        List<Laboratory> laboratoryList = laboratoryService.getlaboratoryappiont(state);
+        model.addAttribute("all", laboratoryList);
+        return "static/pages/back/laboratoryappiont";
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

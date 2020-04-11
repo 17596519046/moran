@@ -9,14 +9,14 @@ import java.util.Date;
 /**
     * user 实体类
     * 2020-04-06 14:44:56
-   */ 
+   */
 @Data
 @Accessors(chain = true)
 public class User{
 	/**
 	*主键id
 	*/
-	private int	id;
+	private Integer	id;
 	/**
 	*1：超管，2：老师，3：学生，4：后勤
 	*/
@@ -42,15 +42,18 @@ public class User{
 	*/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date entranceTime;
+	private String entranceTime1;
 	/**
 	*毕业时间
 	*/
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date graduateTime;
+	protected String graduateTime1;
 	/**
 	*创建时间
 	*/
 	protected Date createTime;
+	protected String createTime1;
 	/**
 	*更新时间
 	*/

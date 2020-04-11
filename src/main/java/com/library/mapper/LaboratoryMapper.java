@@ -42,14 +42,13 @@ public interface LaboratoryMapper {
      * 查询预约实验室详情
      * @return
      */
-    UserLaboratory selectLaboratoryUser(UserLaboratory userLaboratory);
+    UserLaboratory selectLaboratoryUser(Integer id);
 
     /***
      * 根据用户权限，查询实验室预约详情
-     * @param laboratory
      * @return
      */
-    List<Map> selectLaboratoryUserInfo(UserLaboratory laboratory);
+    List<Laboratory> selectLaboratoryUserInfo(int state);
 
 
     /**
@@ -69,4 +68,9 @@ public interface LaboratoryMapper {
      * @param id
      */
     void deleteLaboratory(Integer id);
+
+    List<Laboratory> selectLaboratoryUserInfo1();
+
+//    List<Laboratory> getlaboratoryappiont(int state);
+
 }

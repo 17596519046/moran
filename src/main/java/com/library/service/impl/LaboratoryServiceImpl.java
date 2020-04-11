@@ -6,6 +6,9 @@ import com.library.pojo.UserLaboratory;
 import com.library.service.LaboratoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -66,28 +69,46 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     }
 
     @Override
-    public List<Map> selectLaboratoryUserInfo(UserLaboratory userLaboratory) {
-        return laboratoryMapper.selectLaboratoryUserInfo(userLaboratory);
+    public List<Laboratory> selectLaboratoryUserInfo() {
+        return laboratoryMapper.selectLaboratoryUserInfo(0);
     }
 
+    /**
+     * 通过或者拒绝
+     */
     @Override
-    public UserLaboratory selectLaboratoryUser(UserLaboratory userLaboratory) {
-        return laboratoryMapper.selectLaboratoryUser(userLaboratory);
-    }
-
-    @Override
-    public boolean insertLaboratoryUser(UserLaboratory userLaboratory) {
-        Date date = new Date();
-        return laboratoryMapper.insertLaboratoryUser(userLaboratory
-        .setCreateTime(date).setAppointTime(date).setState("0"));
-    }
-
-    @Override
-    public boolean updateLaboratoryUser(UserLaboratory userLaboratory,User user) {
-        if(userLaboratory.getState().equals("1") || userLaboratory.getState().equals("2")){
-            userLaboratory.setAuditId(user.getId());
+    public void appointmentLaboratory(int state, Integer id, HttpServletRequest request) {
+        // 获取当前登录用户信息
+        User user = (User) request.getSession().getAttribute("User");
+        // 修改预约信息状态
+        UserLaboratory laboratory = laboratoryMapper.selectLaboratoryUser(id);
+        laboratory.setState(String.valueOf(state));
+        laboratory.setAuditId(user.getId());
+        laboratoryMapper.updateLaboratoryUser(laboratory);
+        // 审核通过 修改实验室表信息
+        if (state == 1) {
+            Laboratory laboratory1 = laboratoryMapper.selectLaboratory(laboratory.getId());
+            laboratory1.setUserId(user.getId());
+            laboratory1.setUserName(user.getName());
+            laboratory1.setUserNumber(user.getNumber());
+            laboratoryMapper.updateLaboratory(laboratory1);
         }
-        return laboratoryMapper.updateLaboratoryUser(userLaboratory);
+    }
+
+    /**
+     * 获取实验室预约情况
+     * @param state
+     * @return
+     */
+    @Override
+    public List<Laboratory> getlaboratoryappiont(Integer state) {
+        List<Laboratory> laboratories = new ArrayList<>();
+        if (state == null) {
+            laboratories = laboratoryMapper.selectLaboratoryUserInfo1();
+        } else {
+            laboratories = laboratoryMapper.selectLaboratoryUserInfo(state);
+        }
+        return laboratories;
     }
 
 

@@ -4,6 +4,7 @@ import com.library.pojo.Laboratory;
 import com.library.pojo.User;
 import com.library.pojo.UserLaboratory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -40,11 +41,11 @@ public interface LaboratoryService {
      */
     void deleteLaboratory(Integer id);
 
-    List<Map> selectLaboratoryUserInfo(UserLaboratory userLaboratory);
+    List<Laboratory> selectLaboratoryUserInfo();
 
-    UserLaboratory selectLaboratoryUser(UserLaboratory userLaboratory);
+    void appointmentLaboratory(int state, Integer id, HttpServletRequest request);
 
-    boolean insertLaboratoryUser(UserLaboratory userLaboratory);
+    List<Laboratory> getlaboratoryappiont(Integer state);
 
-    boolean updateLaboratoryUser(UserLaboratory userLaboratory, User user);
+
 }

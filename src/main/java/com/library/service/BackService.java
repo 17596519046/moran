@@ -17,7 +17,7 @@ public interface BackService {
      * @param user
      * @return
      */
-    boolean saveUser(User user);
+    boolean saveUser(User user, HttpServletRequest request);
     /**
      * 修改后台用户信息
      * @param user

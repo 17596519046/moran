@@ -3,48 +3,79 @@
 <mapper namespace="com.library.mapper.LaboratoryMapper">
 
     <insert id="insertLaboratory">
-        INSERT INTO laboratory (name, buildingNo, createTime, isAppointment,updateTime)
+        INSERT INTO laboratory (name, buildingNo, createTime, isAppointment, updateTime)
         VALUES
-        (#{name} ,#{buildingNo} ,#{createTime} ,#{isAppointment},#{updateTime}  )
+        (#{name}, #{buildingNo}, #{createTime}, #{isAppointment}, #{updateTime})
     </insert>
 
     <update id="updateLaboratory">
-        update laboratory set name = #{name} ,buildingNo = #{buildingNo} ,isAppointment = #{isAppointment},updateTime = #{updateTime}
-         where id = #{id}
+        update laboratory
+        set name          = #{name},
+            buildingNo    = #{buildingNo},
+            isAppointment = #{isAppointment},
+            updateTime    = #{updateTime}
+        where id = #{id}
     </update>
 
     <insert id="insertLaboratoryUser">
         INSERT INTO user_laboratory
-         (code, userId, laboratoryId, appointTime, returnTime, overdueTime, auditId, state, createTime)
+        (code, userId, laboratoryId, appointTime, returnTime, overdueTime, auditId, state, createTime)
         VALUES
-        (#{code} ,#{userId} ,#{laboratoryId} ,#{appointTime} ,#{returnTime} ,#{overdueTime} ,#{auditId} ,#{state} ,#{createTime} )
+        (#{code}, #{userId}, #{laboratoryId}, #{appointTime}, #{returnTime}, #{overdueTime}, #{auditId}, #{state},
+         #{createTime})
     </insert>
 
     <update id="updateLaboratoryUser">
-        UPDATE user_laboratory set returnTime = #{returnTime} ,overdueTime = #{overdueTime} ,auditId = #{auditId} ,state = #{state} where id = #{id}
+        UPDATE user_laboratory
+        set returnTime  = #{returnTime},
+            overdueTime = #{overdueTime},
+            auditId     = #{auditId},
+            state       = #{state}
+        where id = #{id}
     </update>
 
     <select id="selectLaboratoryUser" resultType="com.library.pojo.UserLaboratory">
-        select * from user_laboratory where id = #{id}
+        select *
+        from user_laboratory
+        where id = #{id}
     </select>
 
-    <select id="selectLaboratoryUserInfo" resultType="map">
-        select ul.*,l.*,au.name auditName from user_laboratory ul
-        LEFT join user u on u.id = ul.userId
-        LEFT join user au on au.id = ul.auditId
-        LEFT join laboratory l on l.id = ul.laboratoryId
-        where u.id = #{userId}
+    <select id="selectLaboratoryUserInfo" resultType="com.library.pojo.Laboratory">
+        select ul.appointTime,ul.returnTime,ul.code,la.name,la.buildingNo,us.name as userName,us.number,ul.state,ul.id
+        from user_laboratory ul
+                 LEFT JOIN laboratory la on la.id = ul.laboratoryId
+                 Left JOIN user us on ul.userId = us.id
+        WHERE ul.state = #{state}
+    </select>
+    <select id="selectLaboratoryUserInfo1" resultType="com.library.pojo.Laboratory">
+        select ul.appointTime,ul.returnTime,ul.code,la.name,la.buildingNo,us.name as userName,us.number,ul.state,ul.id
+        from user_laboratory ul
+                 LEFT JOIN laboratory la on la.id = ul.laboratoryId
+                 Left JOIN user us on ul.userId = us.id
+        WHERE ul.state != 0
     </select>
 
     <select id="selectList" resultType="com.library.pojo.Laboratory">
-        select * from laboratory
+        select *
+        from laboratory
     </select>
 
     <select id="selectLaboratory" resultType="com.library.pojo.Laboratory">
-        SELECT * from laboratory where id = #{id}
+        SELECT *
+        from laboratory
+        where id = #{id}
     </select>
+    <!--<select id="getlaboratoryappiont" resultType="com.library.pojo.Laboratory">-->
+        <!--SELECT ul.returnTime,ul.state,ul.appointTime,la.name,la.buildingNo,us.name as userName,us.number as userNumber, ul.code-->
+        <!--from user_laboratory ul-->
+                 <!--left join laboratory la on ul.laboratoryId = la.id-->
+                 <!--left join user us on ul.userId = us.id-->
+        <!--where -->
+    <!--</select>-->
 
     <delete id="deleteLaboratory">
-        delete from laboratory where id = #{id}
+        delete
+        from laboratory
+        where id = #{id}
     </delete>
 </mapper>

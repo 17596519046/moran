@@ -5,6 +5,7 @@ import com.library.service.BackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class BackServiceImpl implements BackService {
         if (sys == null){
             return false;
         }
-        request.getSession().setAttribute("systemUser",sys);
+        request.getSession().setAttribute("User",sys);
         return true;
     }
 
@@ -38,8 +39,11 @@ public class BackServiceImpl implements BackService {
      * @return
      */
     @Override
-    public boolean saveUser(User user) {
-        return backLoginMapper.insertUser(user.setCreateTime(new Date()).setUpdateTime(new Date()));
+    public boolean saveUser(User user, HttpServletRequest request) {
+        boolean b = backLoginMapper.insertUser(user.setCreateTime(new Date()).setUpdateTime(new Date()));
+        User sys = backLoginMapper.selectAccountPassword(user);
+        request.getSession().setAttribute("User",sys);
+        return b;
     }
 
     /**
@@ -58,7 +62,20 @@ public class BackServiceImpl implements BackService {
      */
     @Override
     public List<User> selectUserList() {
-        return backLoginMapper.selectUserList();
+        List<User> users = backLoginMapper.selectUserList();
+        for (User user : users) {
+            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+            user.setCreateTime1(sdf.format(user.getCreateTime()));
+            // 如果入学时间不为空，转换时间格式
+            if (user.getGraduateTime() != null) {
+                user.setGraduateTime1(sdf.format(user.getGraduateTime()));
+            }
+            // 如果毕业时间不为空，转换时间格式
+            if (user.getEntranceTime() != null) {
+                user.setEntranceTime1(sdf.format(user.getEntranceTime()));
+            }
+        }
+        return users;
     }
 
     /***

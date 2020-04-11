@@ -102,7 +102,7 @@
             type: 'POST',
             success:function(json) {
                 // if(json.success) {
-                //     window.location.href= "/demo/home";
+                window.location.href= "/back/index.do";
                 // } else {
                 //     alert(json.msg);
                 //     return false;
