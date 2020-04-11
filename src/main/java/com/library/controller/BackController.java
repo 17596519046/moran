@@ -40,6 +40,17 @@ public class BackController {
         return "static/pages/back/login";
     }
 
+    /***
+     * 注销
+     * @param request
+     * @return
+     */
+    @RequestMapping("loginOut")
+    public String loginOut(HttpServletRequest request) {
+        request.getSession().removeAttribute("User");
+        return "static/pages/back/login";
+    }
+
     /**
      * 后台登录接口
      *
