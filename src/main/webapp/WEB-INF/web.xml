@@ -60,7 +60,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
-        <url-pattern>/before/main</url-pattern>
+        <url-pattern>/back/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -74,7 +74,7 @@
 
     <!-- 访问根路径时的默认访问页面，从上到下匹配 -->
     <welcome-file-list>
-        <welcome-file>before/main</welcome-file>
+        <welcome-file>back/login</welcome-file>
     </welcome-file-list>
 
 </web-app>

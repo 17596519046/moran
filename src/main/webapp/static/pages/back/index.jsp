@@ -24,35 +24,29 @@
 <div style="padding: 5px;">
     <div id="sidebar" class="sidebar py-3" style="width: 20%; float: left">
         <div class="list-group" style="text-align: center">
-            <c:if test="${User.role == 1}">
+            <c:if test="${User.role == 1 || User.role == 4}">
                 <a href="/back/user" target="right" class="list-group-item" style="border: 0px">用户管理</a>
-                <a href="/product/product" target="right" class="list-group-item" style="border: 0px">设备管理</a>
+                <a href="/equipment/equipment" target="right" class="list-group-item" style="border: 0px">设备管理</a>
                 <a href="/laboratory/laboratory" target="right" class="list-group-item" style="border: 0px">实验室管理</a>
-                <a href="/product/product" target="right" class="list-group-item" style="border: 0px">设备详情</a>
+                <a href="/equipment/getEquipmentappiont" target="right" class="list-group-item" style="border: 0px">设备详情</a>
                 <a href="/laboratory/getlaboratoryappiont" target="right" class="list-group-item" style="border: 0px">实验室详情</a>
-                <a href="/product/product" target="right" class="list-group-item" style="border: 0px">设备审核</a>
+                <a href="/equipment/selectEquipmentUserInfo" target="right" class="list-group-item" style="border: 0px">设备审核</a>
                 <a href="/laboratory/selectLaboratoryUserInfo" target="right" class="list-group-item" style="border: 0px">实验室审核</a>
             </c:if>
 
-            <c:if test="${User.role == 2}">
-                <a href="/product/product" target="right" class="list-group-item" style="border: 0px">设备详情</a>
-                <a href="/back/vip" target="right" class="list-group-item" style="border: 0px">实验室详情</a>
-                <a href="/phone/phone" target="right" class="list-group-item" style="border: 0px">我的设备</a>
-                <a href="/order/order" target="right" class="list-group-item" style="border: 0px">我的实验室</a>
-            </c:if>
-
-            <c:if test="${User.role == 3}">
-                <a href="/product/product" target="right" class="list-group-item" style="border: 0px">设备详情</a>
-                <a href="/back/vip" target="right" class="list-group-item" style="border: 0px">实验室详情</a>
-                <a href="/phone/phone" target="right" class="list-group-item" style="border: 0px">我的设备</a>
-                <a href="/order/order" target="right" class="list-group-item" style="border: 0px">我的实验室</a>
+            <c:if test="${User.role == 2 || User.role == 3}">
+                <a href="/equipment/equipment" target="right" class="list-group-item" style="border: 0px">设备详情</a>
+                <a href="/laboratory/laboratory" target="right" class="list-group-item" style="border: 0px">实验室管理</a>
+                <a href="/equipment/getMyEquipment" target="right" class="list-group-item" style="border: 0px">我的设备</a>
+                <a href="/laboratory/getMylaboratory" target="right" class="list-group-item" style="border: 0px">我的实验室</a>
             </c:if>
 
         </div>
     </div>
     <div class="sidebar py-3" style="width: 79%; float: right">
         <div class="embed-responsive embed-responsive-4by3">
-            <iframe id="aa" name="right" class="embed-responsive-item" src="/back/user"></iframe>
+            <c:if test="${User.role == 1 || User.role == 4}"><iframe id="aa" name="right" class="embed-responsive-item" src="/back/user"></iframe></c:if>
+            <c:if test="${User.role == 2 || User.role == 3}"><iframe id="aa" name="right" class="embed-responsive-item" src="/equipment/equipment"></iframe></c:if>
         </div>
     </div>
 </div>

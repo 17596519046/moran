@@ -103,6 +103,28 @@ public class LaboratoryController {
         model.addAttribute("all", laboratoryList);
         return "static/pages/back/laboratoryappiont";
     }
+    /**
+     * 我预约的实验室
+     *
+     * @return
+     */
+    @RequestMapping("/getMylaboratory")
+    public String getMylaboratory(Model model, HttpServletRequest request) {
+        List<Laboratory> laboratoryList = laboratoryService.getMylaboratory(request);
+        model.addAttribute("all", laboratoryList);
+        return "static/pages/back/laboratoryappiont";
+    }
+
+    /**
+     * 预约按钮
+     *
+     * @return
+     */
+    @RequestMapping("/insertUserLaboratory")
+    public String insertUserLaboratory(Model model, HttpServletRequest request, int id) {
+        laboratoryService.insertUserLaboratory(request, id);
+        return "redirect: laboratory";
+    }
 
 }
 

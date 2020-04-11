@@ -3,14 +3,14 @@
 <mapper namespace="com.library.mapper.EquipmentMapper">
 
     <insert id="insertEquipment">
-        INSERT INTO equipment (name, buyTime, number, destoryTime, isAppointment,createTime,updateTime)
+        INSERT INTO equipment (name, buyTime, number, destoryTime, isAppointment, createTime, updateTime, userName, userNumber, userId,userPhone)
         VALUES
-        (#{name} ,#{buyTime} ,#{number} ,#{destoryTime} ,#{isAppointment} ,#{createTime} ,#{updateTime}  )
+        (#{name} ,#{buyTime} ,#{number} ,#{destoryTime} ,#{isAppointment} ,#{createTime} ,#{updateTime},#{userName},#{userNumber},#{userId},#{userPhone}  )
     </insert>
 
     <update id="updateEquipment">
-        update equipment set name = #{name} ,buyTime = #{buyTime} ,number = #{number} ,
-        destoryTime = #{destoryTime} ,isAppointment = #{isAppointment},updateTime = #{updateTime}
+        update equipment set name = #{name} ,buyTime = #{buyTime} ,number = #{number} ,userPhone=#{userPhone},
+        destoryTime = #{destoryTime} ,isAppointment = #{isAppointment},updateTime = #{updateTime},userName=#{userName},userNumber=#{userNumber},userId=#{userId}
          where id = #{id}
     </update>
 
@@ -25,10 +25,10 @@
     </update>
 
     <select id="selectEquipmentUser" resultType="com.library.pojo.UserEquipment">
-        SELECT * from user_equipment where id = {id}
+        SELECT * from user_equipment where id = #{id}
     </select>
 
-    <select id="selectEquipmentUserInfo" resultType="map">
+    <select id="selectEquipmentUserInfo" resultType="com.library.pojo.Equipment">
         select ue.*,e.*,au.name auditName from user_equipment ue
         LEFT join user u on u.id = ue.userId
         LEFT join user au on au.id = ue.auditId
@@ -47,4 +47,58 @@
     <delete id="deleteEquipment">
         delete from equipment where id = #{id}
     </delete>
+
+    <select id="getMyEquipment" resultType="com.library.pojo.Equipment">
+        SELECT
+            ul.appointTime,
+            ul.returnTime,
+            ul.code,
+            la.name,
+            la.number,
+            us.name AS userName,
+            us.number as userNumber,
+            ul.state,
+            ul.id
+        FROM
+            user_equipment ul
+                LEFT JOIN equipment la ON la.id = ul.equipmentId
+                LEFT JOIN user us ON ul.userId = us.id
+        WHERE
+            ul.userId = #{id}
+    </select>
+
+    <select id="selectLaboratoryUserInfo" resultType="com.library.pojo.Equipment">
+        SELECT
+            ul.appointTime,
+            ul.returnTime,
+            ul.code,
+            la.name,
+            la.number,
+            us.name AS userName,
+            us.number as userNumber,
+            ul.state,
+            ul.id
+        FROM
+            user_equipment ul
+                LEFT JOIN equipment la ON la.id = ul.equipmentId
+                LEFT JOIN user us ON ul.userId = us.id
+        WHERE ul.state = #{state}
+    </select>
+    <select id="selectLaboratoryUserInfo1" resultType="com.library.pojo.Equipment">
+        SELECT
+            ul.appointTime,
+            ul.returnTime,
+            ul.code,
+            la.name,
+            la.number,
+            us.name AS userName,
+            us.number as userNumber,
+            ul.state,
+            ul.id
+        FROM
+            user_equipment ul
+                LEFT JOIN equipment la ON la.id = ul.equipmentId
+                LEFT JOIN user us ON ul.userId = us.id
+        WHERE ul.state != 0
+    </select>
 </mapper>

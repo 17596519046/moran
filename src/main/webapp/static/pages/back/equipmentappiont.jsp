@@ -28,9 +28,10 @@
         <tr>
             <td>预约编号</td>
             <td>名称</td>
-            <td>楼号</td>
+            <td>设备编号</td>
             <td>预约人</td>
             <td>工号</td>
+            <td>手机号</td>
             <td>预约时间</td>
             <td>归还时间</td>
             <td>状态</td>
@@ -41,7 +42,7 @@
             <tr>
                 <td>${all.code}</td>
                 <td>${all.name}</td>
-                <td>${all.buildingNo}</td>
+                <td>${all.number}</td>
                 <td>${all.userName}</td>
                 <td>${all.userNumber}</td>
                 <td>${all.userPhone}</td>

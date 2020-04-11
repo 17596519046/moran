@@ -4,6 +4,7 @@ import com.library.pojo.Equipment;
 import com.library.pojo.User;
 import com.library.pojo.UserEquipment;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -42,29 +43,15 @@ public interface EquipmentService {
 
     /***
      * 根据权限查询预约设备基本详情
-     * @param userEquipment
      * @return
      */
-    List<Map> selectEquipmentUserInfo(UserEquipment userEquipment);
+    List<Equipment> selectEquipmentUserInfo();
 
-    /***
-     * 查询预约设备基本详情
-     * @param userEquipment
-     * @return
-     */
-    UserEquipment selectEquipmentUser(UserEquipment userEquipment);
+    void insertUserEquipment(HttpServletRequest request, int id);
 
-    /***
-     * 预约实验室
-     * @param userEquipment
-     * @return
-     */
-    boolean insertEquipmentUser(UserEquipment userEquipment);
+    void appointmentEquipment(int state, Integer id, HttpServletRequest request);
 
-    /***
-     * 修改用户预约实验室基本信息
-     * @param userEquipment
-     * @return
-     */
-    boolean updateEquipmentUser(UserEquipment userEquipment,User user);
+    List<Equipment> getEquipmentappiont(Integer state);
+
+    List<Equipment> getMyEquipment(HttpServletRequest request);
 }

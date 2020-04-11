@@ -7,6 +7,7 @@ import com.library.service.LaboratoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.management.StringValueExp;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,10 +88,11 @@ public class LaboratoryServiceImpl implements LaboratoryService {
         laboratoryMapper.updateLaboratoryUser(laboratory);
         // 审核通过 修改实验室表信息
         if (state == 1) {
-            Laboratory laboratory1 = laboratoryMapper.selectLaboratory(laboratory.getId());
+            Laboratory laboratory1 = laboratoryMapper.selectLaboratory(laboratory.getLaboratoryId());
             laboratory1.setUserId(user.getId());
             laboratory1.setUserName(user.getName());
             laboratory1.setUserNumber(user.getNumber());
+            laboratory1.setIsAppointment(2);
             laboratoryMapper.updateLaboratory(laboratory1);
         }
     }
@@ -109,6 +111,37 @@ public class LaboratoryServiceImpl implements LaboratoryService {
             laboratories = laboratoryMapper.selectLaboratoryUserInfo(state);
         }
         return laboratories;
+    }
+    /**
+     * 获取实验室预约情况
+     * @return
+     */
+    @Override
+    public List<Laboratory> getMylaboratory(HttpServletRequest request) {
+        // 获取当前登录用户信息
+        User user = (User) request.getSession().getAttribute("User");
+        // 获取当前登录用户预约的实验室
+        List<Laboratory> laboratories = laboratoryMapper.getMylaboratory(user.getId());
+        return laboratories;
+    }
+
+    @Override
+    public void insertUserLaboratory(HttpServletRequest request, int id) {
+        // 获取当前登录用户信息
+        User user = (User) request.getSession().getAttribute("User");
+        UserLaboratory laboratory = new UserLaboratory();
+        laboratory.setState("0");
+        String s = String.valueOf(System.currentTimeMillis()).substring(0,8) + id;
+        laboratory.setCode(s);
+        laboratory.setUserId(user.getId());
+        laboratory.setLaboratoryId(id);
+        laboratory.setAppointTime(new Date());
+        laboratory.setCreateTime(new Date()).setReturnTime(new Date());
+//        laboratory.setReturnTime()
+        laboratoryMapper.insertLaboratoryUser(laboratory);
+        Laboratory laboratory1 = laboratoryMapper.selectLaboratory(laboratory.getLaboratoryId());
+        laboratory1.setIsAppointment(1);
+        laboratoryMapper.updateLaboratory(laboratory1);
     }
 
 

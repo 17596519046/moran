@@ -1,5 +1,6 @@
 package com.library.controller;
 import com.library.pojo.Equipment;
+import com.library.pojo.Laboratory;
 import com.library.pojo.User;
 import com.library.pojo.UserEquipment;
 import com.library.service.EquipmentService;
@@ -26,7 +27,7 @@ public class EquipmentController {
      */
     @RequestMapping("/updateEquipment")
     public String updateEquipment(Equipment equipment) {
-        if (equipment.getId() != 0) {
+        if (equipment.getId() != null && equipment.getId() != 0) {
             equipmentService.updateEquipment(equipment);
         } else {
             equipmentService.saveEquipment(equipment);
@@ -35,20 +36,15 @@ public class EquipmentController {
     }
 
     /**
-     * 预约设备/根据id,修改预约设备的基本信息
+     * 查询所有设备
      *
      * @return
      */
-    @RequestMapping("/updateEquipmentUser")
-    public String updateEquipmentUser(UserEquipment userEquipment, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("systemUser");
-        if (userEquipment.getId() != 0) {
-            equipmentService.updateEquipmentUser(userEquipment,user);
-        } else {
-            userEquipment.setUserId(user.getId());
-            equipmentService.insertEquipmentUser(userEquipment);
-        }
-        return "redirect:equipment";
+    @RequestMapping("/equipment")
+    public String selectEquipmentList(Model model) {
+        List<Equipment> equipmentList = equipmentService.selectEquipmentList();
+        model.addAttribute("all", equipmentList);
+        return "static/pages/back/equipment";
     }
 
     /**
@@ -71,43 +67,61 @@ public class EquipmentController {
     public String getOneUser(Model model, Integer id) {
         Equipment equipment = equipmentService.selectEquipment(id);
         model.addAttribute("equipment", equipment);
-        return "pages/back/equipment-update";
+        return "static/pages/back/equipmentinsert";
     }
 
     /**
-     * 查询所有用户
-     *
-     * @return
-     */
-    @RequestMapping("/equipment")
-    public String selectEquipmentList(Model model) {
-        List<Equipment> equipmentList = equipmentService.selectEquipmentList();
-        model.addAttribute("all", equipmentList);
-        return "pages/back/equipment";
-    }
-
-    /**
-     * 根据用户权限，查询预约设备的基本详情
-     *
-     * @return
+     * 查询预约实验室的信息
      */
     @RequestMapping("/selectEquipmentUserInfo")
-    public String selectEquipmentUserInfo(Model model, UserEquipment userEquipment) {
-        List<Map> equipmentList = equipmentService.selectEquipmentUserInfo(userEquipment);
-        model.addAttribute("equipmentList", equipmentList);
-        return "pages/back/equipment";
+    public String selectEquipmentUserInfo(Model model) {
+        List<Equipment> EquipmentList = equipmentService.selectEquipmentUserInfo();
+        model.addAttribute("EquipmentList", EquipmentList);
+        return "static/pages/back/equipmentexamine";
     }
 
     /**
-     * 根据id,查询预约设备的基本详情
+     * 通过或者拒绝设备
+     */
+    @RequestMapping("/appointmentEquipment")
+    public String appointmentEquipment(int state, Integer id, HttpServletRequest request) {
+        equipmentService.appointmentEquipment(state, id, request);
+        return "redirect: selectEquipmentUserInfo";
+    }
+
+    /**
+     * 预约详情
      *
      * @return
      */
-    @RequestMapping("/selectEquipmentUser")
-    public String selectEquipmentUser(Model model, UserEquipment userEquipment) {
-        UserEquipment equipment = equipmentService.selectEquipmentUser(userEquipment);
-        model.addAttribute("equipment", equipment);
-        return "pages/back/equipment";
+    @RequestMapping("/getEquipmentappiont")
+    public String getEquipmentappiont(Model model, Integer state) {
+        List<Equipment> EquipmentList = equipmentService.getEquipmentappiont(state);
+        model.addAttribute("all", EquipmentList);
+        return "static/pages/back/equipmentappiont";
+    }
+    /**
+     * 我预约的设备
+     *
+     * @return
+     */
+    @RequestMapping("/getMyEquipment")
+    public String getMyEquipment(Model model, HttpServletRequest request) {
+        List<Equipment> EquipmentList = equipmentService.getMyEquipment(request);
+        model.addAttribute("all", EquipmentList);
+        return "static/pages/back/equipmentappiont";
+    }
+
+
+    /**
+     * 预约按钮
+     *
+     * @return
+     */
+    @RequestMapping("/insertUserEquipment")
+    public String insertUserEquipment(Model model, HttpServletRequest request, int id) {
+        equipmentService.insertUserEquipment(request, id);
+        return "redirect: equipment";
     }
 
 }

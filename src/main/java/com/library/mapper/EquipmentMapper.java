@@ -48,17 +48,15 @@ public interface EquipmentMapper {
 
     /***
      * 查询预约设备详情
-     * @param userEquipment
      * @return
      */
-    UserEquipment selectEquipmentUser(UserEquipment userEquipment);
+    UserEquipment selectEquipmentUser(int id);
 
     /***
      * 根据用户权限，查询设备预约详情
-     * @param userEquipment
      * @return
      */
-    List<Map> selectEquipmentUserInfo(UserEquipment userEquipment);
+    List<Equipment> selectEquipmentUserInfo();
 
     /***
      * 预约设备
@@ -66,4 +64,11 @@ public interface EquipmentMapper {
      * @return
      */
     boolean insertEquipmentUser(UserEquipment userEquipment);
+
+    List<Equipment> getMyEquipment(Integer id);
+
+    List<Equipment> selectLaboratoryUserInfo(Integer state);
+
+    List<Equipment> selectLaboratoryUserInfo1();
+
 }

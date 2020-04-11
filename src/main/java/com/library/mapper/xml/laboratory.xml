@@ -3,17 +3,17 @@
 <mapper namespace="com.library.mapper.LaboratoryMapper">
 
     <insert id="insertLaboratory">
-        INSERT INTO laboratory (name, buildingNo, createTime, isAppointment, updateTime)
+        INSERT INTO laboratory (name, buildingNo, createTime, isAppointment, updateTime, userName, userNumber, userId,userPhone)
         VALUES
-        (#{name}, #{buildingNo}, #{createTime}, #{isAppointment}, #{updateTime})
+        (#{name}, #{buildingNo}, #{createTime}, #{isAppointment}, #{updateTime},#{userName},#{userNumber},#{userId},#{userPhone})
     </insert>
 
     <update id="updateLaboratory">
         update laboratory
         set name          = #{name},
             buildingNo    = #{buildingNo},
-            isAppointment = #{isAppointment},
-            updateTime    = #{updateTime}
+            isAppointment = #{isAppointment},userPhone = #{userPhone},
+            updateTime    = #{updateTime},userName=#{userName},userNumber=#{userNumber},userId=#{userId}
         where id = #{id}
     </update>
 
@@ -53,6 +53,13 @@
                  LEFT JOIN laboratory la on la.id = ul.laboratoryId
                  Left JOIN user us on ul.userId = us.id
         WHERE ul.state != 0
+    </select>
+    <select id="getMylaboratory" resultType="com.library.pojo.Laboratory">
+        select ul.appointTime,ul.returnTime,ul.code,la.name,la.buildingNo,us.name as userName,us.number,ul.state,ul.id
+        from user_laboratory ul
+                 LEFT JOIN laboratory la on la.id = ul.laboratoryId
+                 Left JOIN user us on ul.userId = us.id
+        WHERE ul.userId = #{id}
     </select>
 
     <select id="selectList" resultType="com.library.pojo.Laboratory">

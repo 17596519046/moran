@@ -71,6 +71,8 @@ public interface LaboratoryMapper {
 
     List<Laboratory> selectLaboratoryUserInfo1();
 
+    List<Laboratory> getMylaboratory(Integer id);
+
 //    List<Laboratory> getlaboratoryappiont(int state);
 
 }

@@ -28,6 +28,8 @@ public class Laboratory {
      * 使用人
      */
     private String userName;
+    private String userPhone;
+
     /**
      * 使用人工号
      */

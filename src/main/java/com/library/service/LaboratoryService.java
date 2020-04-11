@@ -47,5 +47,7 @@ public interface LaboratoryService {
 
     List<Laboratory> getlaboratoryappiont(Integer state);
 
+    List<Laboratory> getMylaboratory(HttpServletRequest request);
 
+    void insertUserLaboratory(HttpServletRequest request, int id);
 }
