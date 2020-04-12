@@ -40,13 +40,11 @@ public class User{
 	/**
 	*入学时间
 	*/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date entranceTime;
 	private String entranceTime1;
 	/**
 	*毕业时间
 	*/
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date graduateTime;
 	protected String graduateTime1;
 	/**

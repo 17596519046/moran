@@ -121,9 +121,20 @@ public class LaboratoryController {
      * @return
      */
     @RequestMapping("/insertUserLaboratory")
-    public String insertUserLaboratory(Model model, HttpServletRequest request, int id) {
-        laboratoryService.insertUserLaboratory(request, id);
+    public String insertUserLaboratory(Model model, HttpServletRequest request, int id, String retrurnTime) {
+        laboratoryService.insertUserLaboratory(request, id, retrurnTime);
         return "redirect: laboratory";
+    }
+
+    /**
+     * 归还按钮
+     *
+     * @return
+     */
+    @RequestMapping("/returnLaboratory")
+    public String returnLaboratory(Model model, HttpServletRequest request, int id) {
+        laboratoryService.returnLaboratory(request, id);
+        return "redirect: getMylaboratory";
     }
 
 }

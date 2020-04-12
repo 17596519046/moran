@@ -49,5 +49,7 @@ public interface LaboratoryService {
 
     List<Laboratory> getMylaboratory(HttpServletRequest request);
 
-    void insertUserLaboratory(HttpServletRequest request, int id);
+    void insertUserLaboratory(HttpServletRequest request, int id, String retrurnTime);
+
+    void returnLaboratory(HttpServletRequest request, int id);
 }

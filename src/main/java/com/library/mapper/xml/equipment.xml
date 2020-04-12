@@ -5,11 +5,11 @@
     <insert id="insertEquipment">
         INSERT INTO equipment (name, buyTime, number, destoryTime, isAppointment, createTime, updateTime, userName, userNumber, userId,userPhone)
         VALUES
-        (#{name} ,#{buyTime} ,#{number} ,#{destoryTime} ,#{isAppointment} ,#{createTime} ,#{updateTime},#{userName},#{userNumber},#{userId},#{userPhone}  )
+        (#{name} ,#{buyTime1} ,#{number} ,#{destoryTime} ,#{isAppointment} ,#{createTime} ,#{updateTime},#{userName},#{userNumber},#{userId},#{userPhone}  )
     </insert>
 
     <update id="updateEquipment">
-        update equipment set name = #{name} ,buyTime = #{buyTime} ,number = #{number} ,userPhone=#{userPhone},
+        update equipment set name = #{name} ,buyTime = #{buyTime1} ,number = #{number} ,userPhone=#{userPhone},
         destoryTime = #{destoryTime} ,isAppointment = #{isAppointment},updateTime = #{updateTime},userName=#{userName},userNumber=#{userNumber},userId=#{userId}
          where id = #{id}
     </update>

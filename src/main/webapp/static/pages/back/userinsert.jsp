@@ -21,8 +21,11 @@
 
 <style>
     body {
-        margin: 0px;
+        margin: 20px 0 0 0;
         padding: 0px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
     }
 </style>
 
@@ -34,25 +37,37 @@
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">姓名</label>
             <div class="col-sm-10">
-                <input type="text" name="name" class="form-control" id="name" placeholder="姓名" value="${user.name}">
+                <input style="width: 30%" type="text" name="name" class="form-control" id="name" placeholder="姓名" value="${user.name}">
             </div>
         </div>
         <div class="form-group">
             <label for="number" class="col-sm-2 control-label">工号/学号</label>
             <div class="col-sm-10">
-                <input type="text" name="number" class="form-control" id="number" placeholder="工号/学号"  value="${user.number}">
+                <input style="width: 30%" type="text" name="number" class="form-control" id="number" placeholder="工号/学号"  value="${user.number}">
             </div>
         </div>
         <div class="form-group">
             <label for="grade" class="col-sm-2 control-label">班级</label>
             <div class="col-sm-10">
-                <input type="text" name="grade" class="form-control" id="grade" placeholder="班级" value="${user.grade}">
+                <input style="width: 30%" type="text" name="grade" class="form-control" id="grade" placeholder="班级" value="${user.grade}">
             </div>
         </div>
         <div class="form-group">
             <label for="phone" class="col-sm-2 control-label">手机号</label>
             <div class="col-sm-10">
-                <input type="text" name="phone" class="form-control" id="phone" placeholder="手机号" value="${user.phone}">
+                <input style="width: 30%" type="text" name="phone" class="form-control" id="phone" placeholder="手机号" value="${user.phone}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="entranceTime1" class="col-sm-2 control-label">入学时间</label>
+            <div class="col-sm-10">
+                <input style="width: 30%" name="entranceTime1" id="entranceTime1" class="form-control"  type="date" value="${user.entranceTime1}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="graduateTime1" class="col-sm-2 control-label">毕业时间</label>
+            <div class="col-sm-10">
+                <input style="width: 30%" name="graduateTime1" id="graduateTime1" class="form-control"  type="date" value="${user.graduateTime1}" />
             </div>
         </div>
         <div class="form-group">

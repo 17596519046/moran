@@ -23,6 +23,9 @@
     body {
         margin: 0px;
         padding: 0px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
     }
 </style>
 
@@ -34,19 +37,19 @@
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">名称</label>
             <div class="col-sm-10">
-                <input type="text" name="name" class="form-control" id="name" placeholder="名称" value="${equipment.name}">
+                <input style="width: 30%"type="text" name="name" class="form-control" id="name" placeholder="名称" value="${equipment.name}">
             </div>
         </div>
         <div class="form-group">
-            <label for="buyTime" class="col-sm-2 control-label">购入时间</label>
+            <label for="buyTime1" class="col-sm-2 control-label">购入时间</label>
             <div class="col-sm-10">
-                <input type="text" name="buyTime" class="form-control" id="buyTime" placeholder="购入时间"  value="${equipment.buyTime}">
+                <input style="width: 30%" name="buyTime1" id="buyTime1" class="form-control"  type="date" value="${equipment.buyTime1}" />
             </div>
         </div>
         <div class="form-group">
             <label for="number" class="col-sm-2 control-label">编号</label>
             <div class="col-sm-10">
-                <input type="text" name="number" class="form-control" id="number" placeholder="编号"  value="${equipment.number}">
+                <input style="width: 30%"type="text" name="number" class="form-control" id="number" placeholder="编号"  value="${equipment.number}">
             </div>
         </div>
         <div class="form-group">

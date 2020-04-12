@@ -8,7 +8,7 @@ import java.util.Date;
 /**
     * user_equipment 瀹炰綋绫籠r
     * 2020-04-06 14:48:26
-   */ 
+   */
 @Data
 @Accessors(chain = true)
 public class UserEquipment{
@@ -31,7 +31,7 @@ public class UserEquipment{
 	/**
 	*归还时间
 	*/
-	private Date	returnTime;
+	private String	returnTime;
 	/**
 	*预约人
 	*/

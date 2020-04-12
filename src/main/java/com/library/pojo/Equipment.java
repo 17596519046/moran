@@ -23,7 +23,8 @@ public class Equipment{
 	/**
 	*购入时间
 	*/
-	private String buyTime;
+	private Date buyTime;
+	private String buyTime1;
 	/**
 	*编号
 	*/

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.management.StringValueExp;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,7 +48,13 @@ public class LaboratoryServiceImpl implements LaboratoryService {
      */
     @Override
     public List<Laboratory> selectLaboratoryList() {
-        return laboratoryMapper.selectList();
+        List<Laboratory> list = laboratoryMapper.selectList();
+        SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd");
+        for (Laboratory laboratory : list) {
+            String format1 = format.format(laboratory.getCreateTime());
+            laboratory.setCreateTime1(format1);
+        }
+        return list;
     }
 
     /***
@@ -126,7 +133,7 @@ public class LaboratoryServiceImpl implements LaboratoryService {
     }
 
     @Override
-    public void insertUserLaboratory(HttpServletRequest request, int id) {
+    public void insertUserLaboratory(HttpServletRequest request, int id, String retrurnTime) {
         // 获取当前登录用户信息
         User user = (User) request.getSession().getAttribute("User");
         UserLaboratory laboratory = new UserLaboratory();
@@ -136,11 +143,25 @@ public class LaboratoryServiceImpl implements LaboratoryService {
         laboratory.setUserId(user.getId());
         laboratory.setLaboratoryId(id);
         laboratory.setAppointTime(new Date());
-        laboratory.setCreateTime(new Date()).setReturnTime(new Date());
-//        laboratory.setReturnTime()
+        laboratory.setCreateTime(new Date()).setReturnTime(retrurnTime);
         laboratoryMapper.insertLaboratoryUser(laboratory);
         Laboratory laboratory1 = laboratoryMapper.selectLaboratory(laboratory.getLaboratoryId());
         laboratory1.setIsAppointment(1);
+        laboratoryMapper.updateLaboratory(laboratory1);
+    }
+
+    @Override
+    public void returnLaboratory(HttpServletRequest request, int id) {
+        // 修改预约信息状态
+        UserLaboratory laboratory = laboratoryMapper.selectLaboratoryUser(id);
+        laboratory.setState(String.valueOf(3));
+        laboratoryMapper.updateLaboratoryUser(laboratory);
+        // 审核通过 修改实验室表信息
+        Laboratory laboratory1 = laboratoryMapper.selectLaboratory(laboratory.getLaboratoryId());
+        laboratory1.setUserId(null);
+        laboratory1.setUserName(null);
+        laboratory1.setUserNumber(null);
+        laboratory1.setIsAppointment(0);
         laboratoryMapper.updateLaboratory(laboratory1);
     }
 

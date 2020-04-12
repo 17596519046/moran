@@ -50,8 +50,11 @@
       <div>
         <input type="text" name="phone1" class="phone1" placeholder="手机号" autocomplete="off"/>
       </div>
-      <div>身份
-        <select name="role1">
+      <div>入学时间
+        <input style="width: 200px" name="entranceTime1" id="entranceTime1" placeholder="入学时间"  class="form-control"  type="date" value="" />
+      </div>
+      <div>
+        <select name="role1" style="width: 300px;height: 42px;margin-top: 25px;padding: 0 0 0 15px;background: rgba(45,45,45,.15);border-radius: 6px;color: #ffffff;">
           <option name="role1" value="3">学生</option>
           <option name="role1" value="2">老师</option>
         </select>
@@ -89,24 +92,21 @@
         var n = $("input[name=number1]");
         var name = $("input[name=name1]");
         var role = $("select[name=role1]");
+        var entranceTime1 = $("input[name=entranceTime1]");
         $.ajax({
-            url:"/back/updateUser.do",
+            url:"/back/saveUser.do",
             data:{
                 name : name.val(),
                 number : n.val(),
                 phone : p.val(),
                 id : 0,
                 role : role.val(),
+                entranceTime1 : entranceTime1.val()
             },
             dataType: "json",
             type: 'POST',
             success:function(json) {
-                // if(json.success) {
                 window.location.href= "/back/index.do";
-                // } else {
-                //     alert(json.msg);
-                //     return false;
-                // }
             }
         });
     });
@@ -128,12 +128,7 @@
                 dataType: "json",
                 type: 'POST',
                 success:function(json) {
-                    if(json.success) {
-                        window.location.href= "/back/index.do";
-                    } else {
-                        alert("手机号，工号错误");
-                        return false;
-                    }
+                    window.location.href= "/back/index.do";
                 }
             });
         }

@@ -8,7 +8,7 @@ import java.util.Date;
 /**
     * user_laboratory 瀹炰綋绫籠r
     * 2020-04-06 14:49:08
-   */ 
+   */
 @Data
 @Accessors(chain = true)
 public class UserLaboratory{
@@ -35,7 +35,7 @@ public class UserLaboratory{
 	/**
 	*归还时间
 	*/
-	private Date	returnTime;
+	private String	returnTime;
 	/**
 	*逾期时间
 	*/

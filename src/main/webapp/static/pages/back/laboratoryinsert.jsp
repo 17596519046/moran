@@ -23,6 +23,9 @@
     body {
         margin: 0px;
         padding: 0px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
     }
 </style>
 
@@ -34,13 +37,13 @@
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">名称</label>
             <div class="col-sm-10">
-                <input type="text" name="name" class="form-control" id="name" placeholder="名称" value="${laboratory.name}">
+                <input style="width: 30%"type="text" name="name" class="form-control" id="name" placeholder="名称" value="${laboratory.name}">
             </div>
         </div>
         <div class="form-group">
             <label for="buildingNo" class="col-sm-2 control-label">楼号</label>
             <div class="col-sm-10">
-                <input type="text" name="buildingNo" class="form-control" id="buildingNo" placeholder="楼号"  value="${laboratory.buildingNo}">
+                <input style="width: 30%"type="text" name="buildingNo" class="form-control" id="buildingNo" placeholder="楼号"  value="${laboratory.buildingNo}">
             </div>
         </div>
         <div class="form-group">

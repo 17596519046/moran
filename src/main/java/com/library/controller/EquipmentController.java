@@ -119,9 +119,20 @@ public class EquipmentController {
      * @return
      */
     @RequestMapping("/insertUserEquipment")
-    public String insertUserEquipment(Model model, HttpServletRequest request, int id) {
-        equipmentService.insertUserEquipment(request, id);
+    public String insertUserEquipment(Model model, HttpServletRequest request, int id, String retrurnTime) {
+        equipmentService.insertUserEquipment(request, id,retrurnTime);
         return "redirect: equipment";
+    }
+
+    /**
+     * 归还按钮
+     *
+     * @return
+     */
+    @RequestMapping("/returnEquipment")
+    public String returnEquipment(Model model, HttpServletRequest request, int id) {
+        equipmentService.returnEquipment(request, id);
+        return "redirect: getMyEquipment";
     }
 
 }

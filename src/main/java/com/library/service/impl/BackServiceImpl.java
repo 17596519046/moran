@@ -64,7 +64,7 @@ public class BackServiceImpl implements BackService {
     public List<User> selectUserList() {
         List<User> users = backLoginMapper.selectUserList();
         for (User user : users) {
-            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
             user.setCreateTime1(sdf.format(user.getCreateTime()));
             // 如果入学时间不为空，转换时间格式
             if (user.getGraduateTime() != null) {
@@ -85,7 +85,18 @@ public class BackServiceImpl implements BackService {
      */
     @Override
     public User selectUser(Integer userId) {
-        return backLoginMapper.selectUser(userId);
+        User user = backLoginMapper.selectUser(userId);
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        user.setCreateTime1(sdf.format(user.getCreateTime()));
+        // 如果入学时间不为空，转换时间格式
+        if (user.getGraduateTime() != null) {
+            user.setGraduateTime1(sdf.format(user.getGraduateTime()));
+        }
+        // 如果毕业时间不为空，转换时间格式
+        if (user.getEntranceTime() != null) {
+            user.setEntranceTime1(sdf.format(user.getEntranceTime()));
+        }
+        return user;
     }
 
     /***

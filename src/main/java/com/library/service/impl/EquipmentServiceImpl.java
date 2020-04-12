@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +49,15 @@ public class EquipmentServiceImpl implements EquipmentService {
      */
     @Override
     public List<Equipment> selectEquipmentList() {
-        return equipmentMapper.selectList();
+        List<Equipment> list = equipmentMapper.selectList();
+        SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd");
+        for (Equipment laboratory : list) {
+            if (laboratory.getBuyTime() != null) {
+                String format1 = format.format(laboratory.getBuyTime());
+                laboratory.setBuyTime1(format1);
+            }
+        }
+        return list;
     }
 
     /***
@@ -58,7 +67,13 @@ public class EquipmentServiceImpl implements EquipmentService {
      */
     @Override
     public Equipment selectEquipment(Integer id) {
-        return equipmentMapper.selectEquipment(id);
+        Equipment equipment = equipmentMapper.selectEquipment(id);
+        if (equipment.getBuyTime() != null) {
+            SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd");
+            String format1 = format.format(equipment.getBuyTime());
+            equipment.setBuyTime1(format1);
+        }
+        return equipment;
     }
 
     /***
@@ -76,9 +91,10 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public void insertUserEquipment(HttpServletRequest request, int id) {
+    public void insertUserEquipment(HttpServletRequest request, int id, String retrurnTime) {
         // 获取当前登录用户信息
         User user = (User) request.getSession().getAttribute("User");
+        // 创建预约单
         UserEquipment userEquipment = new UserEquipment();
         userEquipment.setState(0);
         String s = String.valueOf(System.currentTimeMillis()).substring(0, 8) + id;
@@ -86,10 +102,16 @@ public class EquipmentServiceImpl implements EquipmentService {
         userEquipment.setUserId(user.getId());
         userEquipment.setEquipmentId(id);
         userEquipment.setAppointTime(new Date());
-        userEquipment.setReturnTime(new Date());
+        userEquipment.setReturnTime(retrurnTime);
         equipmentMapper.insertEquipmentUser(userEquipment);
+        // 修改设备信息
         Equipment equipment = equipmentMapper.selectEquipment(userEquipment.getEquipmentId());
         equipment.setIsAppointment(1);
+        if (equipment.getBuyTime() != null) {
+            SimpleDateFormat format = new SimpleDateFormat("YY-MM-dd");
+            String format1 = format.format(equipment.getBuyTime());
+            equipment.setBuyTime1(format1);
+        }
         equipmentMapper.updateEquipment(equipment);
 
     }
@@ -132,6 +154,21 @@ public class EquipmentServiceImpl implements EquipmentService {
         // 获取当前登录用户预约的实验室
         List<Equipment> equipmentList = equipmentMapper.getMyEquipment(user.getId());
         return equipmentList;
+    }
+
+    @Override
+    public void returnEquipment(HttpServletRequest request, int id) {
+        // 修改预约信息状态
+        UserEquipment userEquipment = equipmentMapper.selectEquipmentUser(id);
+        userEquipment.setState(3);
+        equipmentMapper.updateEquipmentUser(userEquipment);
+        // 审核通过 修改实验室表信息
+        Equipment laboratory1 = equipmentMapper.selectEquipment(userEquipment.getEquipmentId());
+        laboratory1.setUserId(null);
+        laboratory1.setUserName(null);
+        laboratory1.setUserNumber(null);
+        laboratory1.setIsAppointment(0);
+        equipmentMapper.updateEquipment(laboratory1);
     }
 
 

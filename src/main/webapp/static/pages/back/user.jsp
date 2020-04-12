@@ -17,14 +17,52 @@
     body {
         margin: 0px;
         padding: 0px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
     }
+    .button {
+        cursor: pointer;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        width: 100px;
+        height: 25px;
+        padding: 0;
+        background: #ef4300;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        border: 0px;
+        -moz-box-shadow:
+                0 15px 30px 0 rgba(255,255,255,.25) inset,
+                0 2px 7px 0 rgba(0,0,0,.2);
+        -webkit-box-shadow:
+                0 15px 30px 0 rgba(255,255,255,.25) inset,
+                0 2px 7px 0 rgba(0,0,0,.2);
+        box-shadow:
+                0 15px 30px 0 rgba(255,255,255,.25) inset,
+                0 2px 7px 0 rgba(0,0,0,.2);
+        font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        text-shadow: 0 1px 2px rgba(0,0,0,.1);
+        -o-transition: all .2s;
+        -moz-transition: all .2s;
+        -webkit-transition: all .2s;
+        -ms-transition: all .2s;
+    }
+    .button a{
+        color: #ffffff;
+    }
+    td{border:solid #add9c0; border-width:0px 1px 1px 0px; padding:10px 0px; padding: 10px}
+    table{border:solid #add9c0; border-width:1px 0px 0px 1px;}
 </style>
 
 <body>
 
 <div>
 
-    <a class="btn btn-default" href="../../static/pages/back/userinsert.jsp" role="button">添加管理员</a>
+    <button class="button"><a class="btn btn-default" href="../../static/pages/back/userinsert.jsp" role="button">添加管理员</a></button>
 
     <table>
         <tr>

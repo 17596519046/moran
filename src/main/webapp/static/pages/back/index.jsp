@@ -25,20 +25,20 @@
     <div id="sidebar" class="sidebar py-3" style="width: 20%; float: left">
         <div class="list-group" style="text-align: center">
             <c:if test="${User.role == 1 || User.role == 4}">
-                <a href="/back/user" target="right" class="list-group-item" style="border: 0px">用户管理</a>
-                <a href="/equipment/equipment" target="right" class="list-group-item" style="border: 0px">设备管理</a>
-                <a href="/laboratory/laboratory" target="right" class="list-group-item" style="border: 0px">实验室管理</a>
-                <a href="/equipment/getEquipmentappiont" target="right" class="list-group-item" style="border: 0px">设备详情</a>
-                <a href="/laboratory/getlaboratoryappiont" target="right" class="list-group-item" style="border: 0px">实验室详情</a>
-                <a href="/equipment/selectEquipmentUserInfo" target="right" class="list-group-item" style="border: 0px">设备审核</a>
-                <a href="/laboratory/selectLaboratoryUserInfo" target="right" class="list-group-item" style="border: 0px">实验室审核</a>
+                <a href="/back/user" target="right" class="list-group-item" >用户管理</a>
+                <a href="/equipment/equipment" target="right" class="list-group-item" >设备管理</a>
+                <a href="/laboratory/laboratory" target="right" class="list-group-item" >实验室管理</a>
+                <a href="/equipment/getEquipmentappiont" target="right" class="list-group-item" >设备详情</a>
+                <a href="/laboratory/getlaboratoryappiont" target="right" class="list-group-item" >实验室详情</a>
+                <a href="/equipment/selectEquipmentUserInfo" target="right" class="list-group-item" >设备审核</a>
+                <a href="/laboratory/selectLaboratoryUserInfo" target="right" class="list-group-item" >实验室审核</a>
             </c:if>
 
             <c:if test="${User.role == 2 || User.role == 3}">
-                <a href="/equipment/equipment" target="right" class="list-group-item" style="border: 0px">设备详情</a>
-                <a href="/laboratory/laboratory" target="right" class="list-group-item" style="border: 0px">实验室管理</a>
-                <a href="/equipment/getMyEquipment" target="right" class="list-group-item" style="border: 0px">我的设备</a>
-                <a href="/laboratory/getMylaboratory" target="right" class="list-group-item" style="border: 0px">我的实验室</a>
+                <a href="/equipment/equipment" target="right" class="list-group-item" >设备详情</a>
+                <a href="/laboratory/laboratory" target="right" class="list-group-item" >实验室管理</a>
+                <a href="/equipment/getMyEquipment" target="right" class="list-group-item" >我的设备</a>
+                <a href="/laboratory/getMylaboratory" target="right" class="list-group-item" >我的实验室</a>
             </c:if>
 
         </div>

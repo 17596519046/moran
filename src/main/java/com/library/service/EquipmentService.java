@@ -47,11 +47,13 @@ public interface EquipmentService {
      */
     List<Equipment> selectEquipmentUserInfo();
 
-    void insertUserEquipment(HttpServletRequest request, int id);
+    void insertUserEquipment(HttpServletRequest request, int id, String retrurnTime);
 
     void appointmentEquipment(int state, Integer id, HttpServletRequest request);
 
     List<Equipment> getEquipmentappiont(Integer state);
 
     List<Equipment> getMyEquipment(HttpServletRequest request);
+
+    void returnEquipment(HttpServletRequest request, int id);
 }

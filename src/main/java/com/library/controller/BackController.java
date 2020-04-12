@@ -67,6 +67,21 @@ public class BackController {
     }
 
     /**
+     * 后台注册接口
+     *
+     * @return
+     */
+    @RequestMapping("/saveUser")
+    @ResponseBody
+    public Map saveUser(User user, HttpServletRequest request) {
+        // service层调用后台登陆接口
+        boolean b = backService.saveUser(user, request);
+        HashMap map = new HashMap();
+        map.put("success", b);
+        return map;
+    }
+
+    /**
      * 修改后台用户信息
      *
      * @return

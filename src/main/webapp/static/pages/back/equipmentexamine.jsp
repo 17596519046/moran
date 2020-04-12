@@ -17,14 +17,19 @@
     body {
         margin: 0px;
         padding: 0px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
     }
+    td{border:solid #add9c0; border-width:0px 1px 1px 0px; padding:10px 0px; padding: 10px}
+    table{border:solid #add9c0; border-width:1px 0px 0px 1px;}
 </style>
 
 <body>
 
 <div>
 
-    <table>
+    <table border="1px solid black" cellspacing="0">
         <tr>
             <td>预约编号</td>
             <td>名称</td>
